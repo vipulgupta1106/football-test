@@ -24,12 +24,14 @@ public class StandingsService {
     }
 
     public List<Leagues> getAllLeagues() {
+        log.info("Fetching country and League details");
         return dataGateway.getAllLeagues();
     }
 
     public List<StandingsDTO> getAllStandings(List<Integer> leagueIdList) {
         List<StandingsDTO> finalStandings = new ArrayList<>();
         for(Integer league : leagueIdList){
+            log.info("Fetching standing of league "+ league);
             finalStandings.addAll(dataGateway.getStandings(league));
         }
         return finalStandings;

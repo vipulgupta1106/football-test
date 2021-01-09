@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,31 +44,22 @@ public class DataGateway {
 
     public List<Leagues> getAllLeagues() {
         String finalURL = baseAPI + leaguesDataExtensionPath + apiKeyExtensionPath + apiKey;
+        log.info(" Final API URL : " + finalURL);
         UriComponentsBuilder builder =
                 UriComponentsBuilder.fromHttpUrl(finalURL);
-        ResponseEntity<List<Leagues>> leagueList =
-                restTemplate.exchange(
-                        builder.toUriString(),
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<List<Leagues>>() {
-                        });
-        return leagueList.getBody();
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<Leagues>>() {
+                }).getBody();
 
     }
 
-
     public List<StandingsDTO> getStandings(Integer league) {
         String finalURL = baseAPI + standingsDataExtensionPath + leagueIdFilter + league + apiKeyExtensionPath + apiKey;
+        log.info(" Final API URL : " + finalURL);
         UriComponentsBuilder builder =
                 UriComponentsBuilder.fromHttpUrl(finalURL);
-        ResponseEntity<List<StandingsDTO>> leagueList =
-                restTemplate.exchange(
-                        builder.toUriString(),
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<List<StandingsDTO>>() {
-                        });
-        return leagueList.getBody();
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<StandingsDTO>>() {
+                }).getBody();
     }
 }

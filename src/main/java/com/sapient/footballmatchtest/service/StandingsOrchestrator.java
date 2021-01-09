@@ -26,8 +26,10 @@ public class StandingsOrchestrator {
     }
 
     public StandingLeagueData getRawData() {
+        log.info("Fetching leagues data");
         List<Leagues> leagues = standingsService.getAllLeagues();
         List<Integer> leagueIdList = leagues.stream().map(p -> Integer.parseInt(p.getLeagueId())).collect(Collectors.toList());
+        log.info("Fetching standings for all leagues");
         List<StandingsDTO> standingsDTOS = standingsService.getAllStandings(leagueIdList);
         return new StandingLeagueData(leagues, standingsDTOS);
     }
@@ -63,6 +65,6 @@ public class StandingsOrchestrator {
         if ((filteredStandings.size() > 0)) {
             return transformToFinalOutput(standingLeagueData);
         }
-        return null;
+        throw new RuntimeException("No team found for this combination");
     }
 }
