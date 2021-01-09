@@ -12,6 +12,14 @@ public class StandingLeagueData {
         this.standingsDTO = standingsDTO;
     }
 
+    public void setLeagues(List<Leagues> leagues) {
+        this.leagues = leagues;
+    }
+
+    public void setStandingsDTO(List<StandingsDTO> standingsDTO) {
+        this.standingsDTO = standingsDTO;
+    }
+
     public List<Leagues> getLeagues() {
         return leagues;
     }

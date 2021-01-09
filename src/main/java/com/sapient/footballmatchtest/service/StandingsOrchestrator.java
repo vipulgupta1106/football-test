@@ -62,6 +62,7 @@ public class StandingsOrchestrator {
         List<StandingsDTO> filteredStandings = standingLeagueData.getStandingsDTO().stream().filter(p -> p.getCountryName().equalsIgnoreCase(countryName)
                 && p.getLeagueName().equalsIgnoreCase(leagueName)
                 && p.getTeamName().equalsIgnoreCase(teamName)).collect(Collectors.toList());
+        standingLeagueData.setStandingsDTO(filteredStandings);
         if ((filteredStandings.size() > 0)) {
             return transformToFinalOutput(standingLeagueData);
         }
