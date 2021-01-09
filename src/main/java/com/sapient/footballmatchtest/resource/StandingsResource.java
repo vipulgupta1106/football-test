@@ -39,7 +39,7 @@ public class StandingsResource {
             @ApiResponse(code = 500, message = "Internal server error", response = PropagatingSystemException.class)})
     public List<StandingRow> getAllTeamsStandings() {
         log.info("Getting all teams Standings");
-        List<StandingRow> standingRowList =  standingsOrchestrator.getAllTeamsStandings();
+        List<StandingRow> standingRowList = standingsOrchestrator.getAllTeamsStandings();
         log.info("Successfully fetched the standings of all teams in different leagues");
         return standingRowList;
     }
