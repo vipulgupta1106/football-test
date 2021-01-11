@@ -10,7 +10,7 @@ pipeline{
     stage('docker build'){
       agent any
       steps{
-        sh 'docker build -t springio/gs-spring-boot-docker .'
+        sh 'sudo docker build -t springio/gs-spring-boot-docker .'
       }
     }
     stage('docker run'){
