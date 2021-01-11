@@ -1,6 +1,12 @@
 pipeline{
   agent none
   stages{
+   stage('who'){
+        agent any
+        steps{
+          sh 'whoami'
+        }
+      }
     stage('docker build'){
       agent any
       steps{
