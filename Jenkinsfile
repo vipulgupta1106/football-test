@@ -10,7 +10,7 @@ pipeline{
     stage('docker run'){
       agent any
       steps{
-        sh 'docker run -p 8085:8085 springio/gs-spring-boot-docker'
+        sh 'sudo docker run -p 8085:8085 springio/gs-spring-boot-docker'
       }
     }
   }
