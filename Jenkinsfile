@@ -1,10 +1,10 @@
 pipeline{
   agent none
   stages{
-   stage('who'){
+   stage('pwd'){
         agent any
         steps{
-          sh 'whoami'
+          sh 'pwd'
         }
       }
     stage('docker build'){
