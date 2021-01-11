@@ -1,22 +1,12 @@
 pipeline{
   agent none
   stages{
-  stage('Cloning repo') {
-        steps {
-          sh 'git clone git@github.com:vipulgupta1106/football-test.git'
-        }
-      }
-  stage('make directory'){
-        agent any
-        steps{
-          sh 'mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)'
-        }
-      }
+
 
     stage('docker build'){
       agent any
       steps{
-        sh 'docker build -t springio/gs-spring-boot-docker'
+        sh 'docker build -t springio/gs-spring-boot-docker .'
       }
     }
     stage('docker run'){
