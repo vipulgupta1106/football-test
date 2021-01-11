@@ -3,7 +3,7 @@ pipeline{
   stages{
   stage('Cloning repo') {
         steps {
-          git 'https://github.com/vipulgupta1106/football-test.git'
+          sh 'git clone git@github.com:vipulgupta1106/football-test.git'
         }
       }
   stage('make directory'){
