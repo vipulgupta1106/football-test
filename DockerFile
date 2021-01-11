@@ -1,0 +1,4 @@
+FROM openjdk:8
+ADD target/my-app my-app.jar
+Expose 8085
+ENTRYPOINT ["java", "-jar" , "my-app.jar"]

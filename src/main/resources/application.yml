@@ -5,3 +5,5 @@ application:
   leaguesDataExtensionPath: ?action=get_leagues
   standingsDataExtensionPath: ?action=get_standings
   leagueIdFilter: "&league_id="
+
+server.port: 8085
