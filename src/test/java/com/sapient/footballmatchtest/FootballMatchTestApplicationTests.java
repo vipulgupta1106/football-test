@@ -13,9 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ActiveProfiles(profiles = "test")
 @DirtiesContext
 class FootballMatchTestApplicationTests {
-
 	@Test
 	void contextLoads() {
 	}
-
 }
