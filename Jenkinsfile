@@ -1,38 +1,16 @@
 pipeline{
   agent none
-  tools {
-          maven 'Maven 3.3.9'
-          jdk 'jdk8'
-      }
   stages{
-    stage('Compile'){
+    stage('docker build'){
       agent any
       steps{
-        sh 'mvn compile'
+        sh 'docker build -t springio/gs-spring-boot-docker'
       }
     }
-    stage('Code Quality'){
+    stage('docker run'){
       agent any
       steps{
-        sh 'echo Sonarqube Code Quality Check Done'
-      }
-    }
-    stage('Test'){
-      agent any
-      steps{
-        sh 'mvn test'
-      }
-    }
-    stage('Package'){
-      agent any
-      steps{
-        sh 'mvn package'
-      }
-    }
-    stage('Upload War File To Artifactory'){
-      agent any
-      steps{
-        sh 'echo Uploaded War file to Artifactory'
+        sh 'docker run -p 8080:8080 springio/gs-spring-boot-docker'
       }
     }
   }
