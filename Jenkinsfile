@@ -17,11 +17,12 @@ pipeline {
             }
         }
         stage('docker build'){
-                      agent any
+            dir('target'){
                       steps{
                         sh 'docker build -t vipul/find-standings-project .'
                       }
                     }
+              }
     }
     post{
         always{
