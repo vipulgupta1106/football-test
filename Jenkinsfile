@@ -9,6 +9,7 @@ pipeline {
             steps {
                 sh 'mvn --version'
                 sh 'mvn clean install'
+
             }
             post {
                 success {
@@ -24,9 +25,5 @@ pipeline {
                     }
               }
     }
-    post{
-        always{
-            cleanWs()
-            }
-        }
+
 }
