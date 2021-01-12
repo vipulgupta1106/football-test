@@ -25,7 +25,7 @@ pipeline {
           stage('docker run'){
                agent any
                steps{
-                 sh 'docker run --name webapp -d -p 8085:8085 springio/gs-spring-boot-docker'
+                 sh 'docker run --name webapp -d -p 8085:8085 vipul/find-standings-project'
                }
              }
     }
