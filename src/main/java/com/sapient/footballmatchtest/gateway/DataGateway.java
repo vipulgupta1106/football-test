@@ -47,10 +47,8 @@ public class DataGateway {
         log.info(" Final API URL : " + finalURL);
         UriComponentsBuilder builder =
                 UriComponentsBuilder.fromHttpUrl(finalURL);
-        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<Leagues>>() {
-                }).getBody();
-
+        return exchangeForListData(builder.toUriString(), HttpMethod.GET, new ParameterizedTypeReference<List<Leagues>>() {
+        });
     }
 
     public List<StandingsDTO> getStandings(Integer league) {
@@ -58,8 +56,12 @@ public class DataGateway {
         log.info(" Final API URL : " + finalURL);
         UriComponentsBuilder builder =
                 UriComponentsBuilder.fromHttpUrl(finalURL);
-        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<StandingsDTO>>() {
-                }).getBody();
+        return exchangeForListData(builder.toUriString(), HttpMethod.GET, new ParameterizedTypeReference<List<StandingsDTO>>() {
+        });
     }
+
+    private <T> List<T> exchangeForListData(String uri, HttpMethod httpMethod, ParameterizedTypeReference<List<T>> responseType) {
+        return restTemplate.exchange(uri, httpMethod, null, responseType).getBody();
+    }
+
 }
