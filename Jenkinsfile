@@ -1,29 +1,31 @@
-pipeline{
-  agent none
-  stages{
-  stage('Cloning repo') {
-        steps {
-          sh 'git clone git@github.com:vipulgupta1106/football-test.git'
-        }
-      }
-  stage('make directory'){
-        agent any
-        steps{
-          sh 'mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)'
-        }
-      }
-
-    stage('docker build'){
-      agent any
-      steps{
-        sh 'docker build -t springio/gs-spring-boot-docker'
-      }
+pipeline {
+    agent any
+    tools{
+        maven "3.6.0"
     }
-    stage('docker run'){
-      agent any
-      steps{
-        sh 'docker run -p 8085:8085 springio/gs-spring-boot-docker'
-      }
+    stages {
+        stage ('Maven install') {
+            steps {
+                sh 'mvn --version'
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
+            }
+        }
+        stage('docker build'){
+            steps{
+                sh 'docker stop webapp'
+                sh 'docker system prune -f'
+                sh 'docker build -t vipul/find-standings-project .'
+            }
+        }
+        stage('docker run'){
+            steps{
+                 sh 'docker run --name webapp -d -p 8085:8085 vipul/find-standings-project'
+            }
+        }
     }
-  }
 }
