@@ -31,6 +31,10 @@ public class StandingsOrchestrator {
         List<Integer> leagueIdList = leagues.stream().map(p -> Integer.parseInt(p.getLeagueId())).collect(Collectors.toList());
         log.info("Fetching standings for all leagues");
         List<StandingsDTO> standingsDTOS = standingsService.getAllStandings(leagueIdList);
+        return makeStandingLeagueDataObject(leagues, standingsDTOS);
+    }
+
+    public StandingLeagueData makeStandingLeagueDataObject(List<Leagues> leagues, List<StandingsDTO> standingsDTOS) {
         return new StandingLeagueData(leagues, standingsDTOS);
     }
 
