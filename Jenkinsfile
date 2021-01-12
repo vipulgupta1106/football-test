@@ -1,23 +1,28 @@
-pipeline{
-  agent none
-  stages{
-   stage('pwd'){
-        agent any
-        steps{
-          sh 'pwd'
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
         }
-      }
-    stage('docker build'){
-      agent any
-      steps{
-        sh 'docker build -t springio/gs-spring-boot-docker .'
-      }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true install'
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
+            }
+        }
     }
-    stage('docker run'){
-      agent any
-      steps{
-        sh 'sudo docker run -p 8085:8085 springio/gs-spring-boot-docker'
-      }
-    }
-  }
 }
