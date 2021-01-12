@@ -1,8 +1,13 @@
 pipeline {
     agent any
+    tools{
+        maven "3.6.0"
+    }
+
     stages {
         stage ('Build') {
             steps {
+                sh 'mvn --version'
                 sh 'mvn clean install'
             }
             post {
@@ -11,11 +16,10 @@ pipeline {
                 }
             }
         }
-         stage('docker build'){
-              agent any
-              steps{
-                sh 'docker build -t football/vipul-spring-boot-docker .'
-              }
-            }
     }
+    post{
+        always{
+            cleanWs()
+            }
+        }
 }
