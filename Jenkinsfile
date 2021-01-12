@@ -19,7 +19,7 @@ pipeline {
         stage('docker build'){
                       agent any
                       steps{
-                        sh 'docker build -t football/my-app .'
+                        sh 'docker build -t vipul/find-standings-project .'
                       }
                     }
     }

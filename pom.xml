@@ -69,7 +69,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>my-app</finalName>
+		<finalName>find-standings-project</finalName>
 	</build>
 
 </project>
