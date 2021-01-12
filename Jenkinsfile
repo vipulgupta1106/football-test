@@ -19,6 +19,7 @@ pipeline {
         }
         stage('docker build'){
                       steps{
+                        sh 'docker system prune -f'
                         sh 'docker build -t vipul/find-standings-project .'
                       }
               }
