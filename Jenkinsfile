@@ -1,12 +1,11 @@
 pipeline {
-    agent {
-     docker{
-     image "maven:3.6-jdk-8"
-     label "master"
-     }
+    agent any
+    tools{
+        maven "3.6.0"
     }
+
     stages {
-        stage ('Build') {
+        stage ('Maven Build') {
             steps {
                 sh 'mvn --version'
                 sh 'mvn clean install'
