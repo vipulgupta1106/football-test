@@ -13,7 +13,7 @@ RUN mvn -f /home/app/pom.xml clean install
 
 FROM openjdk:8
 EXPOSE 8085
-ARG JAR_FILE=target/*.jar
+ARG JAR_FILE=/home/app/target/*.jar
 COPY ${JAR_FILE} my-app.jar
 ENTRYPOINT ["java","-jar","/my-app.jar"]
 
