@@ -6,7 +6,6 @@ pipeline {
      docker{
      image "maven:3.6-jdk-8"
      label "master"
-     args "-v /tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG = /var/maven/.m2"
      }
     }
     stages {
@@ -21,6 +20,12 @@ pipeline {
                 }
             }
         }
+        stage('docker build'){
+                      agent any
+                      steps{
+                        sh 'docker build -t football/vipul-spring-boot-docker .'
+                      }
+                    }
     }
     post{
         always{
