@@ -18,11 +18,11 @@ pipeline {
             }
         }
         stage('docker build'){
-            dir('target'){
+
                       steps{
                         sh 'docker build -t vipul/find-standings-project .'
                       }
-                    }
+
               }
     }
 
