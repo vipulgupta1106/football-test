@@ -1,9 +1,10 @@
 FROM openjdk:8
 EXPOSE 8085
 #ARG JAR_FILE=/var/lib/jenkins/workspace/test-2/target/my-app.jar
-ADD /var/lib/jenkins/workspace/test-2/target/my-app.jar /usr/local/service
-WORKDIR /usr/local/service
-ENTRYPOINT ["java","-jar","/my-app.jar"]
+CMD ["cd /var/lib/jenkins/.m2/repository/com/sapient/football-match-test/0.0.1-SNAPSHOT"]
+ADD my-app.jar my-app.jar
+#WORKDIR /usr/local/service
+ENTRYPOINT ["java","-jar","my-app.jar"]
 #
 #
 #FROM maven:3.5.2-jdk-8 AS build
